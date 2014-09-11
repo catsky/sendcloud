@@ -60,7 +60,7 @@ module Sendcloud
     end
 
     def deliver!(mail)
-      
+      raise
       begin
         result = self.post('mail.send', 
           :to => mail.destinations.join(';'),
@@ -78,6 +78,8 @@ module Sendcloud
       
   end
 
+
   ActionMailer::Base.add_delivery_method :sendcloud, Sendcloud::DeliveryMethod
+
 
 end
