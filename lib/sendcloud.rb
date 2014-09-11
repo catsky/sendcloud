@@ -60,7 +60,6 @@ module Sendcloud
     end
 
     def deliver!(mail)
-      raise
       begin
         result = self.post('mail.send', 
           :to => mail.destinations.join(';'),
