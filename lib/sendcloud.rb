@@ -61,7 +61,7 @@ module Sendcloud
 
     def deliver!(mail)
       begin
-        result = self.post('mail.send', 
+        result = Sendcloud.post('mail.send', 
           :to => mail.destinations.join(';'),
           :html => mail.body.encoded,
           :subject => mail.subject,
