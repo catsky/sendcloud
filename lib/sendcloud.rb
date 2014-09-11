@@ -55,8 +55,9 @@ module Sendcloud
 
   class DeliveryMethod  
 
-    def initialize(opts={})
-      @settings=opts
+    attr_accessor :settings
+    def initialize(settings)
+      self.settings = settings
     end
 
     def deliver!(mail)
