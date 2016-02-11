@@ -6,8 +6,8 @@ describe  Sendcloud::Mail do
 
     it 'should return success' do
       response = Sendcloud::Mail.send({
-                               :to => '272056334@qq.com',
-                               :from => 'notification@78jian.com',
+                               :to => 'chilaoshi@outlook.com',
+                               :from => 'chilaoshi@outlook.com',
                                :subject => 'test',
                                :html => 'rspec test'
                            })

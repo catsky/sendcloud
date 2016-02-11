@@ -3,7 +3,7 @@ require 'sendcloud'
 
 RSpec.configure do |_|
   Sendcloud.setup do |config|
-    config.api_user = 'api_user@example.com'
-    config.api_key = 'api key'
+    config.api_user = 'mail_chilaoshi'
+    config.api_key = 'dvB7ft2bdUavgYMW'
   end
 end
