@@ -1,3 +1,4 @@
+require 'action_mailer'
 require 'rest-client'
 require 'sendcloud/mail'
 require 'sendcloud/mail_list'
@@ -51,16 +52,46 @@ module Sendcloud
     end
 
   end
+
+  class DeliveryMethod  
+
+    attr_accessor :settings
+    def initialize(settings)
+      self.settings = settings
+    end
+
+    def deliver!(mail)
+      begin
+        result = Sendcloud.post('mail/send', 
+          :to => mail.destinations.join(';'),
+          :html => mail.body.encoded,
+          :subject => mail.subject,
+          :from => mail.from_addrs.first,
+          :fromname => mail[:fromname].to_s
+          )
+        
+        puts "Sendcloud send email result --------->\n#{result}"
+      rescue =>e
+        raise e
+      end
+    end 
+      
+  end
+
+
+  ActionMailer::Base.add_delivery_method :sendcloud, Sendcloud::DeliveryMethod
+
+
   
   private 
   def self.rest_client_send method, url, options
    request =  RestClient::Request.execute(:method => method, :url => url, :verify_ssl => false, :payload => options) #, :params => options) #, {:params => options})
   end
-  
+
   def self.rest_get url, options
     rest_client_send :get, url, options
   end
-  
+
   def self.rest_post url, options
     rest_client_send :post, url, options
   end
