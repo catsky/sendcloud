@@ -30,7 +30,6 @@ module Sendcloud
   end
 
   def self.post(path, params)
-
     request(path, params) do |url, options|
       rest_post(url, options)
     end
@@ -85,7 +84,12 @@ module Sendcloud
   
   private 
   def self.rest_client_send method, url, options
-   request =  RestClient::Request.execute(:method => method, :url => url, :verify_ssl => false, :payload => options) #, :params => options) #, {:params => options})
+    begin
+     request =  RestClient::Request.execute(:method => :post,
+    :url => url, :verify_ssl => false, :payload => options)
+    rescue RestClient::Exception => e
+      puts e.http_body
+    end
   end
 
   def self.rest_get url, options

@@ -13,6 +13,20 @@ describe  Sendcloud::Mail do
                            })
       expect(response['message']).to eq('请求成功')
     end
+  end
+  
+  describe 'send template' do
+
+    it 'should return success' do
+      response = Sendcloud::Mail.send_template({
+                                xsmtpapi: { to: ['zhdhui@outlook.com'],  
+                                           sub: {"%name%" => ['catsky']}
+                                          }.to_json,
+                               from: 'test@sendcloud.org',
+                               templateInvokeName: 'test_template_active'
+                           })
+      expect(response['message']).to eq('请求成功')
+    end
 
   end
 

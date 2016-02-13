@@ -9,7 +9,7 @@ module Sendcloud
     end
 
     def send_template(params = {})
-      Sendcloud.post('mail/send_template', params)
+      Sendcloud.post('mail/sendtemplate', params)
     end
 
   end
